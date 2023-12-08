@@ -44,7 +44,7 @@ const validateAttempts = () => {
 };
 
 //#region Buttons Click
-const handleButtonClick = (e) => {
+const handleStartBtnClick = (e) => {
   e.preventDefault();
   if (input.value > 10 || input.value < 0 || input.value === "") {
     alert("Insira um número entre 0 e 10!");
@@ -56,15 +56,23 @@ const handleButtonClick = (e) => {
 const handleFinishBtnClick = () => {
   location.reload();
 };
-//#endregion
 
-//#region Events
-button.addEventListener("click", handleButtonClick);
-finishButton.addEventListener("click", handleFinishBtnClick);
+const keypressFinishBtn = (e) => {
+  if (e.key === "Enter" && start.classList.contains("hide")) {
+    handleFinishBtnClick();
+  }
+};
 
-input.addEventListener("input", () => {
+const sliceInput = () => {
   if (input.value.length > 2) {
     input.value = input.value.slice(0, 2);
   }
-});
+};
+//#endregion
+
+//#region Events
+button.addEventListener("click", handleStartBtnClick);
+finishButton.addEventListener("click", handleFinishBtnClick);
+document.addEventListener("keypress", keypressFinishBtn);
+input.addEventListener("input", sliceInput);
 //#endregion
