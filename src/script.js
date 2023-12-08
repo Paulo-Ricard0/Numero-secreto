@@ -8,11 +8,8 @@ const finishButton = document.getElementById("finish_button");
 const number = Math.floor(Math.random() * 11);
 let attemptsNumber = 1;
 
-const hideStart = () => {
+const toggleScreen = () => {
   start.classList.toggle("hide");
-};
-
-const hideFinish = () => {
   finish.classList.toggle("hide");
 };
 
@@ -24,20 +21,21 @@ const errorAlert = () => {
   }
 };
 
+//#region Attempts
 const formatAttempts = (attempts) => {
-  return attempts > 1 ? `${attempts} tentativas` : `${attempts} tentativa`;
+  return attempts > 1 ? `${attempts} tentativas!` : `${attempts} tentativa!`;
 };
 
 const showAttempts = () => {
   attempts_title.innerText = `Você acertou em ${formatAttempts(
     attemptsNumber
-  )} tentativas!`;
+  )}`;
 };
+//#endregion
 
 const validateAttempts = () => {
   if (parseInt(input.value) === number) {
-    hideStart();
-    hideFinish();
+    toggleScreen();
     showAttempts();
   } else {
     attemptsNumber++;
@@ -45,10 +43,10 @@ const validateAttempts = () => {
   }
 };
 
-// click button
+//#region Buttons Click
 const handleButtonClick = (e) => {
   e.preventDefault();
-  if (input.value > 10 || input.value < 0 || input.value) {
+  if (input.value > 10 || input.value < 0 || input.value === "") {
     alert("Insira um número entre 0 e 10!");
   } else {
     validateAttempts();
@@ -56,13 +54,12 @@ const handleButtonClick = (e) => {
 };
 
 const handleFinishBtnClick = () => {
-  hideFinish();
   location.reload();
 };
+//#endregion
 
-// Events
+//#region Events
 button.addEventListener("click", handleButtonClick);
-
 finishButton.addEventListener("click", handleFinishBtnClick);
 
 input.addEventListener("input", () => {
@@ -70,3 +67,4 @@ input.addEventListener("input", () => {
     input.value = input.value.slice(0, 2);
   }
 });
+//#endregion
