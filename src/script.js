@@ -72,5 +72,5 @@ const sliceInput = () => {
 guessButton.addEventListener("click", handleGuessButtonClick);
 finishButton.addEventListener("click", handleFinishButtonClick);
 document.addEventListener("keypress", keypressFinishButton);
-userInput.addEventListener("userInput", sliceInput);
+userInput.addEventListener("input", sliceInput);
 //#endregion
